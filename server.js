@@ -1,11 +1,20 @@
 var express = require('express');
 var app = express();
-var server = require('http').createServer(app);
-var SkyRTC = require('skyrtc').listen(server);
+var fs = require('fs');
 var path = require("path");
+//根据项目的路径导入生成的证书文件  
+var privateKey  = fs.readFileSync(path.join(__dirname, './certificate/private.pem'), 'utf8');  
+var certificate = fs.readFileSync(path.join(__dirname, './certificate/file.crt'), 'utf8');  
+var credentials = {key: privateKey, cert: certificate};  
+
+var server = require('http').createServer(app);
+var httpsServer = require('https').createServer(credentials, app);
+
+var SkyRTC = require('skyrtc').listen(httpsServer);
+
 
 var port = process.env.PORT || 3000;
-server.listen(port);
+httpsServer.listen(port);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

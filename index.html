@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>SkyRTC聊天室Demo</title>
+  <title>分队聊天吧</title>
   <style type="text/css">
     html, body {
       width: 100%;
@@ -85,7 +85,7 @@
   <div id="files">
   </div>
 </body>
-<script type="text/javascript" src="/SkyRTC-client.js"></script>
+<script type="text/javascript" src="SkyRTC-client.js"></script>
 <script type="text/javascript">
   var videos = document.getElementById("videos");
   var sendBtn = document.getElementById("sendBtn");
@@ -214,6 +214,6 @@
     msgs.appendChild(p);
   });
   //连接WebSocket服务器
-  rtc.connect("ws:" + window.location.href.substring(window.location.protocol.length).split('#')[0], window.location.hash.slice(1));
+  rtc.connect("wss:" + window.location.href.substring(window.location.protocol.length).split('#')[0], window.location.hash.slice(1));
 </script>
 </html>
